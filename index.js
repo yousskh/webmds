@@ -7,6 +7,7 @@ const io = new Server(server);
 const JsonDB = require('node-json-db').JsonDB;
 const Config = require('node-json-db/dist/lib/JsonDBConfig').Config;
 const fs = require('fs');
+const PORT = process.env.PORT;
 
 var db = new JsonDB(new Config("public/data/eleves.json", true, true, '/'));
 var dbS = new JsonDB(new Config("public/data/settings.json", true, true, '/'));
@@ -16,9 +17,8 @@ app.use(express.static(__dirname + '/public'));
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');
 });
-
-server.listen(3000, () => {
-    console.log('Server started | listening on *:3000');
+server.listen(PORT, () => {
+    console.log(`Server started | listening on ${PORT}`);
 });
 
 io.on('connection', (socket) => {
