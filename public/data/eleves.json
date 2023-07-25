@@ -1,0 +1,71 @@
+{
+    "length": 11,
+    "eleves": {
+        "0": {
+            "prenom": "Youssef",
+            "nom": "Khemira",
+            "age": "18",
+            "classe": "2"
+        },
+        "1": {
+            "prenom": "Samir",
+            "nom": "Loussif",
+            "age": "80",
+            "classe": "3"
+        },
+        "2": {
+            "prenom": "Zyed",
+            "nom": "Kor",
+            "age": "2",
+            "classe": "8"
+        },
+        "3": {
+            "prenom": "Monir",
+            "nom": "Khemira",
+            "age": "49",
+            "classe": "7"
+        },
+        "4": {
+            "prenom": "Sofiane",
+            "nom": "Khemira",
+            "age": "13",
+            "classe": "2"
+        },
+        "5": {
+            "prenom": "AZERTY",
+            "nom": "Uiop",
+            "age": "44",
+            "classe": "3"
+        },
+        "6": {
+            "prenom": "Slimen",
+            "nom": "Zyed",
+            "age": "45",
+            "classe": "9"
+        },
+        "7": {
+            "prenom": "HIchem",
+            "nom": "Douiri",
+            "age": "30",
+            "classe": "5"
+        },
+        "8": {
+            "prenom": "oyo",
+            "nom": "yoy",
+            "age": "98",
+            "classe": "0"
+        },
+        "9": {
+            "prenom": "via",
+            "nom": "izil",
+            "age": "3",
+            "classe": "4"
+        },
+        "10": {
+            "prenom": "oiefoi",
+            "nom": "fjoifo",
+            "age": "22",
+            "classe": "2"
+        }
+    }
+}

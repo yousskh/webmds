@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Web Madrassa</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="/scripts/main.js" defer></script>
+</head>
+<body>
+    <div id="main-frame">
+        <div id="entete">
+            <img id="m-icon" src="/svg/madrassa-icon.svg" alt="icône madrassa">
+            <h1>Web M</h1>
+            <div id="avertissement-div">
+                <img id="screen-size" src="/svg/screen-size.svg" alt="icône erreur">
+                <div id="avertissement-entete" class="tooltip">
+                    Taille de la page
+                    <div class="bottom">
+                        <p>La taille de la fenêtre est petite. Certains éléments ne pourront pas s'afficher correctement.</p>
+                        <i></i>
+                    </div>
+                </div>
+            </div>
+            <div id="co-status">
+                <img src="/svg/sync.svg" id="refreshServerLoad" alt="chargement serveur">
+                <div id="co-status-on">
+                    <img id="co-on-img" src="/svg/co-on.svg" alt="icône connexion ok">
+                    <div id="co-on" class="tooltip">
+                        Serveur connecté
+                        <div class="bottom">
+                            <p>La connexion au serveur est établie. La liaison est vérifiée toutes les 3 secondes.</p>
+                            <i></i>
+                        </div>
+                    </div>
+                </div>
+                <div id="co-status-off">
+                    <img id="co-off-img" src="/svg/co-off.svg" alt="icône erreur connexion">
+                    <div id="co-off" class="tooltip">
+                        Serveur déconnecté
+                        <div class="bottom">
+                            <p>Impossible d'établir la connexion. Vérifiez vos paramètres ; si le problème persiste, contacter l'administation.</p>
+                            <i></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="container">
+            <div id="menu-lateral">
+                <button id="b-inscriptions" class="button" role="button">➞ Inscriptions</button>
+                <button id="b-eleves" class="button" role="button">➞ Élèves</button>
+                <button id="b-params" class="button" role="button">➞ Paramètres</button>
+                <button id="b-dvp" class="button" role="button">➞ Développement</button>
+            </div>
+
+            <div id="board">
+
+                <div id="inscriptions" class="page-frame">
+                    <div class="page-title">
+                        <h3>Inscriptions</h3>
+                    </div>
+                    <div class="horizontal-layout">
+                        <div id="ajouter-eleves" class="fct-frame">
+                            <h4>Ajouter un élève</h4>
+                            <div class="horizontal-layout-right">
+                                <h5>Prénom</h5>
+                                <input id="i-prenom" type="text">
+                                <label class="inputlabel" for="i-prenom"></label>
+                            </div>
+                            <div class="horizontal-layout-right">
+                                <h5>Nom</h5>
+                                <input id="i-nom" type="text">
+                                <label class="inputlabel" for="i-nom"></label>
+                            </div>
+                            <div class="horizontal-layout-right">
+                                <h5>Âge</h5>
+                                <input id="i-age" type="text">
+                                <label class="inputlabel" for="i-age"></label>
+                            </div>
+                            <div class="horizontal-layout-right">
+                                <h5>Classe</h5>
+                                <input id="i-classe" type="text">
+                                <label class="inputlabel" for="i-classe"></label>
+                            </div>
+                            <div class="horizontal-layout-right">
+                                <button id="add-eleve" class="mini-button" role="button">Ajouter l'élève</button>
+                            </div>
+                            <div class="horizontal-layout-right" id="div-result-msg"></div>
+                        </div>
+                        <div id="export" class="fct-frame">
+                            <h4>Exportation</h4>
+                            <div class="hl-fit">
+                                <h5>Format d'exportation : </h5>
+                                <select id="exportFormat" name="exportf">
+                                    <option value="">Choisir un format</option>
+                                    <option value="csv">Format CSV</option>
+                                    <option value="json">Format JSON</option>
+                                </select>
+                                <label class="inputlabel" for="exportFormat"></label>
+                                <button id="download" class="mini-button" role="button">Télécharger</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="eleves" class="page-frame">
+                    <div class="page-title">
+                        <h3>Élèves</h3>
+                    </div>
+                    <div class="horizontal-layout">
+                            <div id="eleves-list" class="fct-frame">
+                                <h4>Liste des élèves</h4>
+                                <div class="hl-fit">
+                                    <div id="listinfos" class="horizontal-layout">
+                                        <h5>Statut actuel : </h5>
+                                        <img id="sync-icon" src="/svg/sync.svg" alt="[sync]">
+                                        <img id="sync-ok" src="/svg/sync-ok.svg" alt="[sync ok]">
+                                        <button id="refresh-elist" class="mini-button">Actualiser</button>
+                                    </div>
+                                </div>
+                                <div id="elist" class="vertical-scroll"></div>
+                            </div>
+                            <div id="eleves-apercu" class="fct-frame">
+                                <h4>Aperçu</h4>
+                                <p id="aucun-apercu">Sélectionner un élève</p>
+                                <div id="div-apercu">
+                                    <div class="horizontal-layout">
+                                        <div id="elevesInfos" class="vertical-layout">
+                                            <h5 id="a-prenom">Prénom : </h5>
+                                            <h5 id="a-nom">Nom : </h5>
+                                            <h5 id="a-age">Âge : </h5>
+                                            <h5 id="a-classe">Classe : </h5>
+                                        </div>
+                                        <div id="eleve-photo">
+                                            Aucune photo
+                                        </div>
+                                    </div>
+                                    <hr class="ligne">
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                <div id="params" class="page-frame">
+                    <h3>Paramètres</h3>
+                    <div class="horizontal-layout">
+                        <div id="param-generaux" class="fct-frame">
+                            <h4>Paramètres généraux</h4>
+
+                            <div class="hl-fit">
+                                <input type="checkbox" id="listDetailsSwitch">
+                                <label class="inputlabel" for="listDetailsSwitch"></label>
+                                <div id="listdetails-div" class="tooltip checkbox">
+                                    Détails de liste étendus
+                                    <div class="bottom">
+                                        <p>Affiche des informations supplémentaires dans la liste d'élèves pour avoir un aperçu général.</p>
+                                        <i></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="hl-fit">
+                                <input type="checkbox" id="storeSettings">
+                                <label class="inputlabel" for="storeSettings"></label>
+                                <div id="storesettings-div" class="tooltip checkbox">
+                                    Sauvegarde des paramètres
+                                    <div class="bottom">
+                                        <p>Enregistre les paramètres sur le serveur pour les récupérer à
+                                            chaque session. Vous devez activer le paramètre après avoir sélectionné
+                                            vos paramètres.</p>
+                                        <i></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div id="param-avances" class="fct-frame">
+                            <h4>Paramètres avancés</h4>
+
+                            <div class="hl-fit">
+                                <input type="checkbox" id="dvpMenu">
+                                <label class="inputlabel" for="dvpMenu"></label>
+                                <div id="dvpmenu-div" class="tooltip checkbox">
+                                    Menu de développement
+                                    <div class="bottom">
+                                        <p>Affiche le menu de développement dans le panneau latéral.</p>
+                                        <i></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div id="dvp" class="page-frame">
+                    <h3>Menu de développement</h3>
+                    <div class="horizontal-layout">
+                        <div class="vertical-layout multiframe">
+                            <div id="dbfunctions" class="fct-frame">
+                                <h4>Base de données</h4>
+                                <div class="hl-fit">
+                                    <h5>Chemin d'accès : </h5>
+                                    <input id="fileDir" class="" type="text">
+                                    <label class="inputlabel" for="fileDir"></label>
+                                    <button id="checkDir" class="mini-button">Vérifier</button>
+                                </div>
+                                <div class="hl-fit">
+                                    <h5>Chemins habituels : </h5>
+                                    <select id="pathList" name="chemins">
+                                        <option value="">Choisir un chemin</option>
+                                        <option value="public">public</option>
+                                        <option value="public/data/eleves.json">public/data/eleves.json</option>
+                                        <option value="public/data/settings.json">public/data/settings.json</option>
+                                        <option value="public/scripts/main.js">public/scripts/main.js</option>
+                                        <option value="index.js">index.js</option>
+                                    </select>
+                                    <label class="inputlabel" for="pathList"></label>
+                                    <button id="insertPath" class="mini-button">Insérer</button>
+                                </div>
+                                <div class="hl-fit">
+                                    <button id="showFile" class="mini-button">Afficher le fichier</button>
+                                </div>
+                            </div>
+                            <div id="other" class="fct-frame">
+                                <h4>Non défini</h4>
+                            </div>
+                        </div>
+                        <div id="apercu-data" class="fct-frame">
+                            <h4>Aperçu des données</h4>
+                            <div id="dataLines" class="vertical-scroll horizontal-scroll">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="use-error">
+        <img id="mobile-error" src="/svg/mobile-error.svg" alt="icône erreur mobile">
+        <p>Impossible d'utiliser Web Madrassa sur mobile.</p>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+</body>
+</html>
