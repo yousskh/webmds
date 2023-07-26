@@ -188,10 +188,11 @@ function addElevesEvent(data) {
 function showEleveDetails(id, data) {
     document.getElementById("aucun-apercu").style.display = "none";
     document.getElementById("div-apercu").style.display = "flex";
-    document.getElementById("a-prenom").textContent = `Prénom : ${data[0][id]}`
-    document.getElementById("a-nom").textContent = `Nom : ${data[1][id]}`
-    document.getElementById("a-age").textContent = `Âge : ${data[2][id]}`
-    document.getElementById("a-classe").textContent = `Classe : ${data[3][id]}`
+    document.getElementById("a-prenom").textContent = `Prénom : ${data[0][id]}`;
+    document.getElementById("a-nom").textContent = `Nom : ${data[1][id]}`;
+    document.getElementById("a-age").textContent = `Âge : ${data[2][id]}`;
+    document.getElementById("a-classe").textContent = `Classe : ${data[3][id]}`;
+    document.getElementById("a-id").textContent = `ID : ${id}`;
 }
 
 document.getElementById("listDetailsSwitch").addEventListener("click", function() {
@@ -247,4 +248,18 @@ document.getElementById("showFile").addEventListener("click", function() {
             }
         }
     });
+});
+
+document.getElementById("editValueButton").addEventListener("click", function () {
+    let editValueName = document.getElementById("editValueName").value;
+    let editValue = document.getElementById("editValue").value;
+    let id = document.getElementById("a-id").textContent.split(" ")[2];
+    alert({id, editValueName, editValue})
+    if (editValueName !== "" && editValue !== "") {
+        socket.emit("changeValue", {id, editValueName, editValue}, function(err, responseData) {
+            if (err === null) {
+                document.getElementById("a-" + editValueName).style.color = "orange";
+            }
+        });
+    }
 });
