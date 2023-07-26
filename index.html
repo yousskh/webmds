@@ -130,12 +130,27 @@
                                             <h5 id="a-nom">Nom : </h5>
                                             <h5 id="a-age">Âge : </h5>
                                             <h5 id="a-classe">Classe : </h5>
+                                            <h5 id="a-id">ID : </h5>
                                         </div>
                                         <div id="eleve-photo">
                                             Aucune photo
                                         </div>
                                     </div>
                                     <hr class="ligne">
+                                    <div class="hl-fit">
+                                        <h5>Modifier une valeur : </h5>
+                                        <select id="editValueName" name="exportf">
+                                            <option value="">Choisir une valeur</option>
+                                            <option value="prenom">Prénom</option>
+                                            <option value="nom">Nom</option>
+                                            <option value="age">Âge</option>
+                                            <option value="classe">Classe</option>
+                                        </select>
+                                        <label class="inputlabel" for="editValueName"></label>
+                                        <input type="text" id="editValue">
+                                        <label class="inputlabel" for="editValue"></label>
+                                        <button class="mini-button" id="editValueButton">Modifier</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
