@@ -7,7 +7,7 @@ const io = new Server(server);
 const JsonDB = require('node-json-db').JsonDB;
 const Config = require('node-json-db/dist/lib/JsonDBConfig').Config;
 const fs = require('fs');
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 
 var db = new JsonDB(new Config("public/data/eleves.json", true, true, '/'));
 var dbS = new JsonDB(new Config("public/data/settings.json", true, true, '/'));
@@ -101,6 +101,9 @@ io.on('connection', (socket) => {
                 res(null, lignes);
             }
         });
+    });socket.on("changeValue", async function (data, res) {
+        await db.push(`/eleves/${data[0]}/${data[1]}`, data[2]);
+        res(null);
     });
 });
 
