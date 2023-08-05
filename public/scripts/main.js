@@ -188,6 +188,10 @@ function addElevesEvent(data) {
 function showEleveDetails(id, data) {
     document.getElementById("aucun-apercu").style.display = "none";
     document.getElementById("div-apercu").style.display = "flex";
+    document.getElementById("a-prenom").style.color = "#3c4043";
+    document.getElementById("a-nom").style.color = "#3c4043";
+    document.getElementById("a-age").style.color = "#3c4043";
+    document.getElementById("a-classe").style.color = "#3c4043";
     document.getElementById("a-prenom").textContent = `Prénom : ${data[0][id]}`;
     document.getElementById("a-nom").textContent = `Nom : ${data[1][id]}`;
     document.getElementById("a-age").textContent = `Âge : ${data[2][id]}`;
@@ -212,16 +216,16 @@ document.getElementById("storeSettings").addEventListener("click", function() {
         [document.getElementById("storeSettings").checked,
         document.getElementById("listDetailsSwitch").checked,
         document.getElementById("dvpMenu").checked],
-        function (err, responseData) {
+        function (err) {
             if (err) {
-                alert(err);
+                alert(err.value);
             }
     });
 });
 
 document.getElementById("checkDir").addEventListener("click", function() {
     socket.emit("checkDir", document.getElementById("fileDir").value,
-        function (err, responseData) {
+        function (err) {
             if (err) {
                 document.getElementById("fileDir").style.backgroundColor = "rgba(255, 0, 0, 0.2)";
             } else {
@@ -254,12 +258,15 @@ document.getElementById("editValueButton").addEventListener("click", function ()
     let editValueName = document.getElementById("editValueName").value;
     let editValue = document.getElementById("editValue").value;
     let id = document.getElementById("a-id").textContent.split(" ")[2];
-    alert({id, editValueName, editValue})
     if (editValueName !== "" && editValue !== "") {
-        socket.emit("changeValue", {id, editValueName, editValue}, function(err, responseData) {
+        socket.emit("changeValue", [id, editValueName, editValue], function(err) {
             if (err === null) {
                 document.getElementById("a-" + editValueName).style.color = "orange";
             }
         });
     }
+});
+
+document.getElementById("newpage").addEventListener("click", function () {
+        document.location.href = "index.html"
 });

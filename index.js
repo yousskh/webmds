@@ -8,19 +8,49 @@ const JsonDB = require('node-json-db').JsonDB;
 const Config = require('node-json-db/dist/lib/JsonDBConfig').Config;
 const fs = require('fs');
 const PORT = process.env.PORT || 3000;
+/*const connectDB = require("./db");
+process.on("unhandledRejection", err => {
+    console.log(`Une erreur est survenue : ${err.message}`)
+    server.close(() => process.exit(1))
+}) */
 
 var db = new JsonDB(new Config("public/data/eleves.json", true, true, '/'));
 var dbS = new JsonDB(new Config("public/data/settings.json", true, true, '/'));
 
-app.use(express.static(__dirname + '/public'));
 
+/*app.use(express.static(__dirname + '/public'));
+app.use(express.json())
+app.use("/api/auth", require("./auth/Route"))
+
+const { auth } = require('express-openid-connect');
+
+const config = {
+    authRequired: false,
+    auth0Logout: true,
+    secret: '50b5af9af6abc815e0f44fa471494c67ab5e0e4255232afa394163f1e5e645d5',
+    baseURL: 'http://localhost:3000',
+    clientID: 'Fukzbcb1NLyvHPCGGWbwAloGke9ZjVke',
+    issuerBaseURL: 'https://dev-webmds.eu.auth0.com'
+};
+
+// auth router attaches /login, /logout, and /callback routes to the baseURL
+app.use(auth(config));
+
+// req.isAuthenticated is provided from the auth router
 app.get('/', (req, res) => {
+    res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
+}); */
+
+app.get('/adminmenu', (req, res) => {
+    res.sendFile(__dirname + '/admin.html');
+});
+
+app.get('/index', (req, res) => {
     res.sendFile(__dirname + '/index.html');
 });
 server.listen(PORT, () => {
     console.log(`Server started | listening on ${PORT}`);
 });
-
 io.on('connection', (socket) => {
     console.log("[CONNECTION] New user connected");
     socket.on("disconnect", () => {
@@ -101,9 +131,16 @@ io.on('connection', (socket) => {
                 res(null, lignes);
             }
         });
-    });socket.on("changeValue", async function (data, res) {
+    });
+    socket.on("changeValue", async function (data, res) {
         await db.push(`/eleves/${data[0]}/${data[1]}`, data[2]);
         res(null);
+    });
+    socket.on("newPage", async function (data, resp) {
+        app.get('/', (req, res) => {
+            res.redirect("/page.html");
+        });
+        resp(null);
     });
 });
 
@@ -146,3 +183,5 @@ function convertToCSV(arr) {
         return Object.values(it).toString()
     }).join('\n')
 }
+
+//connectDB();
